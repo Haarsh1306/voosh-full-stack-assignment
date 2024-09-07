@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import AppBar from "../components/AppBar";
 
 // eslint-disable-next-line react/prop-types
-const AuthForm = ({ type, onSubmit }) => {
+const AuthForm = ({ type, onSubmit, Error }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const {
@@ -49,13 +49,13 @@ const AuthForm = ({ type, onSubmit }) => {
   };
 
   const renderFormFields = () => {
-    if (type === 'signup') {
+    if (type === "signup") {
       return (
         <>
           <input
             type="text"
             placeholder="First Name"
-            {...register("firstName", { required: "First Name is required" })}
+            {...register("first_name", { required: "First Name is required" })}
             className="w-full p-2 border border-gray-300 rounded mb-3"
           />
           {errors.firstName && (
@@ -65,7 +65,7 @@ const AuthForm = ({ type, onSubmit }) => {
           <input
             type="text"
             placeholder="Last Name"
-            {...register("lastName", { required: "Last Name is required" })}
+            {...register("last_name", { required: "Last Name is required" })}
             className="w-full p-2 border border-gray-300 rounded mb-3"
           />
           {errors.lastName && (
@@ -107,14 +107,17 @@ const AuthForm = ({ type, onSubmit }) => {
           <input
             type="password"
             placeholder="Confirm Password"
-            {...register("confirmPassword", {
+            {...register("confirm_password", {
               required: "Confirm Password is required",
-              validate: value => value === watch("password") || "Passwords do not match",
+              validate: (value) =>
+                value === watch("password") || "Passwords do not match",
             })}
             className="w-full p-2 border border-gray-300 rounded mb-3"
           />
           {errors.confirmPassword && (
-            <span className="text-red-500">{errors.confirmPassword.message}</span>
+            <span className="text-red-500">
+              {errors.confirmPassword.message}
+            </span>
           )}
         </>
       );
@@ -163,7 +166,7 @@ const AuthForm = ({ type, onSubmit }) => {
       <div className="flex flex-col justify-center items-center h-full gap-4">
         <div className="flex justify-start w-1/3">
           <h2 className="text-blue-500 text-2xl font-semibold">
-            {type === 'signup' ? 'Sign Up' : 'Login'}
+            {type === "signup" ? "Sign Up" : "Login"}
           </h2>
         </div>
         <form
@@ -176,26 +179,27 @@ const AuthForm = ({ type, onSubmit }) => {
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded-sm hover:bg-blue-600 transition"
             >
-              {type === 'signup' ? 'Sign Up' : 'Login'}
+              {type === "signup" ? "Sign Up" : "Login"}
             </button>
+            {Error && <span className="text-red-500">{Error}</span>}
             <div className="flex justify-center items-center gap-2">
               <span className="font-semibold">
-                {type === 'signup'
-                  ? 'Already have an account?'
+                {type === "signup"
+                  ? "Already have an account?"
                   : "Don't have an account?"}
               </span>
               <Link
                 className="font-semibold text-blue-500"
-                to={type === 'signup' ? '/login' : '/signup'}
+                to={type === "signup" ? "/login" : "/signup"}
               >
-                {type === 'signup' ? 'Login' : 'Sign Up'}
+                {type === "signup" ? "Login" : "Sign Up"}
               </Link>
             </div>
             <button
               type="button"
               className="bg-blue-500 text-white px-4 py-2 rounded-sm hover:bg-blue-600 transition"
             >
-              {type === 'signup' ? 'Sign Up' : 'Login'} with Google
+              {type === "signup" ? "Sign Up" : "Login"} with Google
             </button>
           </div>
         </form>
