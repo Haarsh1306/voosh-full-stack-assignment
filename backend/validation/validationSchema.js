@@ -11,4 +11,15 @@ const loginSchema = z.object({
     password: z.string().min(6),
 });
 
-module.exports = {loginSchema, registerSchema};
+const createTaskSchema = z.object({
+    title: z.string().min(3),
+    description: z.string().min(6),
+});
+
+const updateTaskSchema = z.object({
+    title: z.string().min(3).optional(),
+    description: z.string().min(6).optional(),
+    status: z.enum(["pending", "ongoing", "done"]).optional()
+});
+
+module.exports = {loginSchema, registerSchema, createTaskSchema, updateTaskSchema};
