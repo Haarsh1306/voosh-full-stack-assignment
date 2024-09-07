@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db/db");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const {
   registerSchema,
   loginSchema,
@@ -25,9 +26,12 @@ router.post("/register", async (req, res) => {
         .status(400)
         .json({ success: false, error: "User already exists" });
     }
+
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+
     const result = await pool.query(
-      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
-      [data.name, data.email, data.password]
+      "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
+      [data.first_name, data.last_name, data.email, hashedPassword]
     );
 
     res.status(201).json({
@@ -51,17 +55,23 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ success: false, error: error.errors });
     }
 
-    const result = await pool.query(
-      "SELECT * FROM users WHERE email = $1 AND password = $2",
-      [data.email, data.password]
-    );
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [
+      data.email,
+    ]);
 
     if (!result.rows.length) {
       return res
         .status(400)
-        .json({ success: false, error: "Invalid email or password" });
+        .json({ success: false, error: "Email not registered" });
     }
 
+    const isPasswordValid = await bcrypt.compare(
+      data.password,
+      result.rows[0].password
+    );
+    if (!isPasswordValid) {
+      return res.status(400).json({ success: false, error: "Wrong password" });
+    }
     const token = jwt.sign(
       { email: result.rows[0].email, user_id: result.rows[0].user_id },
       process.env.JWT_SECRET,

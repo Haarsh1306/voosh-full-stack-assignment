@@ -1,13 +1,25 @@
-import './App.css';
+import { RouterProvider } from "react-router-dom";
+import "./App.css";
+import router from "./routes/routes";
+import { ToastContainer } from "react-toastify";
 function App() {
-  
-
   return (
     <>
-     Hi
-        
+      <RouterProvider router={router} />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
