@@ -3,6 +3,8 @@ const router = express.Router();
 const pool = require("../db/db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const authenticateToken = require("../middleware/authenticate");
+
 const {
   registerSchema,
   loginSchema,
@@ -82,6 +84,10 @@ router.post("/login", async (req, res) => {
   } catch {
     res.status(500).json({ success: false, error: error.message });
   }
+});
+
+router.get('/me', authenticateToken, async (req, res) => {
+    res.status(200).json({ success: true, data: req.user });
 });
 
 module.exports = router;

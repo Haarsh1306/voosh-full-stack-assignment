@@ -5,6 +5,7 @@ const BACKEND_URL = {
     auth :{
         login: API_URL + '/auth/login',
         register: API_URL + '/auth/register',
+        me: API_URL + '/auth/me',
     },
     tasks :{
         get: API_URL + '/tasks/get',
