@@ -12,7 +12,7 @@ This project is a task management application similar to Trello, built for the F
 
 ## Project Overview
 
-The application frontend is built using React, Tailwind CSS, while the backend is powered by Node.js with Express. It provides a user-friendly interface for managing tasks with drag-and-drop functionality, allowing users to seamlessly organize tasks within columns.
+The application frontend is built using React, Tailwind CSS, while the backend is powered by Node.js with Express and PostgreSQL for storing information about databases. It provides a user-friendly interface for managing tasks with drag-and-drop functionality, allowing users to seamlessly organize tasks within columns.
 
 ## Key Features
 
