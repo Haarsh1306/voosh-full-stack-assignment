@@ -53,6 +53,19 @@ To get started with the project, follow these steps:
 
 - **`/dashboard`**: Dashboard to manage todos
 
+## Project Screenshots
+- Login page
+
+![Login page](./images/login.png)
+
+- Signup page
+
+![Signup page](./images/signup.png)
+
+- Dashboard page
+
+![Dashboard Page](./images/dashboard.png)
+
 # Live Link 
 https://voosh-full-stack-assignment-frontend.vercel.app
 
