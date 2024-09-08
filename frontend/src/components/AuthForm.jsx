@@ -1,12 +1,17 @@
 import { useForm } from "react-hook-form";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link, useSearchParams } from "react-router-dom";
 import AppBar from "../components/AppBar";
+import { useEffect } from "react";
+import axios from "axios";
+import BACKEND_URL from "../../utils/backendUrl";
 
 // eslint-disable-next-line react/prop-types
 const AuthForm = ({ type, onSubmit, Error }) => {
   const navigate = useNavigate();
   const location = useLocation();
- 
+  const [searchParam] = useSearchParams();
+  const token = searchParam.get("token");
+
   const {
     register,
     handleSubmit,
@@ -25,6 +30,24 @@ const AuthForm = ({ type, onSubmit, Error }) => {
   const googleLogin = () => {
     window.location.href = "http://localhost:3000/api/auth/google";
   };
+  useEffect(() => {
+    const getMe = async () => {
+      try {
+        const result = await axios.get(BACKEND_URL.auth.me, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        if (result.data.success) {
+          localStorage.setItem("AUTH_TOKEN", token); 
+          navigate("/dashboard");
+        }
+      } catch {
+        navigate("/login");
+      }
+    };
+    getMe();
+  }, [token, navigate]);
 
   const actions = () => {
     return (
