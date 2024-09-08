@@ -6,7 +6,7 @@ import AppBar from "../components/AppBar";
 const AuthForm = ({ type, onSubmit, Error }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const param = new URLSearchParams(location.search).get("token");
+ 
   const {
     register,
     handleSubmit,

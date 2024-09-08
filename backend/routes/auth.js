@@ -106,7 +106,7 @@ router.get(
       { email: req.user.email, userId: req.user.user_id },
       process.env.JWT_SECRET
     );
-    const url = 'http://localhost:3000/login?token=' + accessToken;
+    const url = 'https://voosh-full-stack-assignment-frontend.vercel.app/login?token=' + accessToken;
     res.redirect(url);
   }
 );
