@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  
+
   const onSubmit = async (data) => {
     try {
       const result = await axios.post(BACKEND_URL.auth.login, data);
