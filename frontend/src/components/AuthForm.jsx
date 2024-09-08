@@ -28,7 +28,7 @@ const AuthForm = ({ type, onSubmit, Error }) => {
   };
 
   const googleLogin = () => {
-    window.location.href = "https://voosh-full-stack-assignment.onrender.com/api/auth/google";
+    window.location.href = BACKEND_URL.auth.google;
   };
   useEffect(() => {
     const getMe = async () => {
