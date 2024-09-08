@@ -103,7 +103,7 @@ router.get(
   }),
   function (req, res) {
     const accessToken = jwt.sign(
-      { email: req.user.email, userId: req.user.user_id },
+      { email: req.user.email, user_id: req.user.user_id },
       process.env.JWT_SECRET
     );
     const url = 'https://voosh-full-stack-assignment-frontend.vercel.app/login?token=' + accessToken;

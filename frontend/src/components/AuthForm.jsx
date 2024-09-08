@@ -47,7 +47,7 @@ const AuthForm = ({ type, onSubmit, Error }) => {
       }
     };
     getMe();
-  }, [token, navigate]);
+  }, [token]);
 
   const actions = () => {
     return (

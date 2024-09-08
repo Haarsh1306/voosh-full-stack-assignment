@@ -16,7 +16,6 @@ const Login = () => {
         navigate("/dashboard");
       }
     } catch (error) {
-      console.log(error.response.data.error);
       setError(error.response.data.error);
     }
   };
