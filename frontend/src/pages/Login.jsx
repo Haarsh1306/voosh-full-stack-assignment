@@ -37,7 +37,7 @@ const Login = () => {
       }
     };
     getMe();
-  }, [navigate]);
+  }, []);
 
   return <AuthForm type="login" onSubmit={onSubmit} Error={error} />;
 };

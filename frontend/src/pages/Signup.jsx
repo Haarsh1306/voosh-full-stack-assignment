@@ -38,7 +38,7 @@ const Signup = () => {
       }
     };
     getMe();
-  }, [navigate]);
+  }, []);
   return (
     <div>
       <AuthForm type="signup" onSubmit={onSubmit} Error={error} />
