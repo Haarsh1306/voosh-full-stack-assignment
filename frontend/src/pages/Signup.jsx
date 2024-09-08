@@ -34,7 +34,7 @@ const Signup = () => {
           navigate("/dashboard");
         }
       } catch {
-        navigate("/login");
+        navigate("/signup");
       }
     };
     getMe();
