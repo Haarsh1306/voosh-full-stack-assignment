@@ -3,7 +3,6 @@ import BACKEND_URL from "../../utils/backendUrl";
 import AuthForm from "../components/AuthForm";
 import axios from "axios";
 import { useState } from "react";
-import { useEffect } from "react";
 const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -20,24 +19,6 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("AUTH_TOKEN");
-    const getMe = async () => {
-      try {
-        const result = await axios.get(BACKEND_URL.auth.me, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-        if (result.data.success) {
-          navigate("/dashboard");
-        }
-      } catch {
-        navigate("/login");
-      }
-    };
-    getMe();
-  }, []);
 
   return <AuthForm type="login" onSubmit={onSubmit} Error={error} />;
 };

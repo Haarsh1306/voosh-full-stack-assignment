@@ -43,7 +43,7 @@ const AuthForm = ({ type, onSubmit, Error }) => {
           navigate("/dashboard");
         }
       } catch {
-        navigate("/login");
+        console.log("error");
       }
     };
     getMe();

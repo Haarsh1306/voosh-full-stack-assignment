@@ -23,7 +23,8 @@ const Dashboard = () => {
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [viewTaskDetailsModalOpen, setViewTaskDetailsModalOpen] = useState(false);
+  const [viewTaskDetailsModalOpen, setViewTaskDetailsModalOpen] =
+    useState(false);
   const [sortOption, setSortOption] = useState("Recent");
 
   const actions = () => (
@@ -252,7 +253,9 @@ const Dashboard = () => {
     const sortedColumns = Object.keys(columnsToSort).reduce((acc, columnId) => {
       let sortedItems = [...columnsToSort[columnId].items];
       if (option === "Recent") {
-        sortedItems.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        sortedItems.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
       } else if (option === "A-Z") {
         sortedItems.sort((a, b) => a.title.localeCompare(b.title));
       }
@@ -321,7 +324,7 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
               <span className="text-gray-700 font-medium">Sort By:</span>
-              <select 
+              <select
                 className="border border-gray-300 rounded-sm px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={sortOption}
                 onChange={handleSortChange}

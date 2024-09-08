@@ -21,24 +21,6 @@ const Signup = () => {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("AUTH_TOKEN");
-    const getMe = async () => {
-      try {
-        const result = await axios.get(BACKEND_URL.auth.me, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-        if (result.data.success) {
-          navigate("/dashboard");
-        }
-      } catch {
-        navigate("/signup");
-      }
-    };
-    getMe();
-  }, []);
   return (
     <div>
       <AuthForm type="signup" onSubmit={onSubmit} Error={error} />
