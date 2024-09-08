@@ -6,6 +6,7 @@ import AppBar from "../components/AppBar";
 const AuthForm = ({ type, onSubmit, Error }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const param = new URLSearchParams(location.search).get("token");
   const {
     register,
     handleSubmit,
@@ -19,6 +20,10 @@ const AuthForm = ({ type, onSubmit, Error }) => {
 
   const onSignupClick = () => {
     navigate("/signup");
+  };
+
+  const googleLogin = () => {
+    window.location.href = "http://localhost:3000/api/auth/google";
   };
 
   const actions = () => {
@@ -198,6 +203,7 @@ const AuthForm = ({ type, onSubmit, Error }) => {
             <button
               type="button"
               className="bg-blue-500 text-white px-4 py-2 rounded-sm hover:bg-blue-600 transition"
+              onClick={googleLogin}
             >
               {type === "signup" ? "Sign Up" : "Login"} with Google
             </button>

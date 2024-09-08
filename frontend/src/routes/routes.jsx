@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Dashboard from "../pages/Dashboard";
+import Error from "../pages/Error";
 
 
 const routes = [
@@ -17,6 +18,14 @@ const routes = [
     {
         path: '/dashboard',
         element: <Dashboard/>,
+    },
+    {
+        path: '/',
+        element: <Dashboard/>
+    },
+    {
+        path: '/*',
+        element: <Error message="Error 404 not found"/>
     }
 ]
 

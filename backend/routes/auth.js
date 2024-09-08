@@ -4,7 +4,7 @@ const pool = require("../db/db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const authenticateToken = require("../middleware/authenticate");
-
+const passport = require('../passportAuth');
 const {
   registerSchema,
   loginSchema,
@@ -89,5 +89,26 @@ router.post("/login", async (req, res) => {
 router.get('/me', authenticateToken, async (req, res) => {
     res.status(200).json({ success: true, data: req.user });
 });
+
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/api/auth/login",
+    session: false,
+  }),
+  function (req, res) {
+    const accessToken = jwt.sign(
+      { email: req.user.email, userId: req.user.user_id },
+      process.env.JWT_SECRET
+    );
+    const url = 'http://localhost:3000/login?token=' + accessToken;
+    res.redirect(url);
+  }
+);
 
 module.exports = router;
